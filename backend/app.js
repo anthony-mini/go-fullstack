@@ -1,19 +1,31 @@
 /**
-* Importation d'express avec la commande `require`
+* Importation d'express avec la commande `` require ``
+* Importation de moongose avec la methode `` require ``
 *
 * Constante *app* qui fera appel à la méthode `express()`qui permet l'appel de l'application express.
 *
-* Méthode `use`. Pour que le serveur Node retourne une réponse en fonction de l'application Express. --> Envoie d'une réponse en Json avec l'objet `message`.
 *
-* Exportation de cette constante pour pouvoir y accéder dans d'autres fichiers
 */
 
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
 
 // Récupération du corps JSON, venant d'une requête de l'application front-end. (Donne accès au 'body' de chaque requêtes)
 app.use(express.json());
+
+/**
+ * ** Connexion à la base de données MongoDB via Mongoose **
+ * 
+ */
+
+ mongoose.connect('mongodb+srv://admin-gofullstack:6sZ5ub7Nrp0c7zpD@cluster0.5w0hq4z.mongodb.net/?retryWrites=true&w=majority',
+ { useNewUrlParser: true,
+   useUnifiedTopology: true })
+ .then(() => console.log('Connexion à MongoDB réussie !'))
+ .catch(() => console.log('Connexion à MongoDB échouée !'));
+ 
 
 /**
  * Création d'un header :
@@ -57,4 +69,5 @@ app.get('/api/stuff', (req, res, next) => {
     res.status(200).json(stuff);
   });
 
+  // Exportation de la constante `` app `` pour pouvoir y accéder dans d'autres fichiers
 module.exports = app;
