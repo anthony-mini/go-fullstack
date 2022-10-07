@@ -10,11 +10,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-const app = express();
-
-// Récupération du corps JSON, venant d'une requête de l'application front-end. (Donne accès au 'body' de chaque requêtes)
-app.use(express.json());
-
 /**
  * ** Connexion à la base de données MongoDB via Mongoose **
  * 
@@ -25,7 +20,12 @@ app.use(express.json());
    useUnifiedTopology: true })
  .then(() => console.log('Connexion à MongoDB réussie !'))
  .catch(() => console.log('Connexion à MongoDB échouée !'));
- 
+
+const app = express();
+
+// Récupération du corps JSON, venant d'une requête de l'application front-end. (Donne accès au 'body' de chaque requêtes)
+app.use(express.json());
+
 
 /**
  * Création d'un header :
