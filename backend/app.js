@@ -11,6 +11,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const stuffRoutes = require('./routes/stuff');
+const userRoutes = require('./routes/user');
 
 /**
  * ** Connexion à la base de données MongoDB via Mongoose **
@@ -43,6 +44,7 @@ app.use(express.json());
 
 // Importation des routes 
 app.use('/api/stuff', stuffRoutes);
+app.use('/api/auth', userRoutes);
 
 
 // Exportation de la constante `` app `` pour pouvoir y accéder dans d'autres fichiers
